@@ -18,7 +18,7 @@ public class Blog {
     private String Content;
     private String Title;
     @CreationTimestamp
-    private Date Pubdate;
+    private Date PubDate;
 
     @ManyToOne
     @JoinColumn
@@ -28,6 +28,14 @@ public class Blog {
     private List<Image> imageList=new ArrayList<>();
 
     public Blog() {
+    }
+
+    public Date getPubDate() {
+        return PubDate;
+    }
+
+    public void setPubDate(Date pubDate) {
+        PubDate = pubDate;
     }
 
     public int getId() {
