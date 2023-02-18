@@ -16,7 +16,7 @@ public class ImageController {
     ImageService imageService;
 
     @PostMapping("/{blogId}/add-image")
-    public ResponseEntity<String> addImage(@PathVariable int blogId, @RequestParam String description, @RequestParam String dimensions) throws Exception {
+    public ResponseEntity<String> addImage(@PathVariable int blogId, @RequestParam String description, @RequestParam String dimensions) {
         // Add image into the give blog
         Image image=imageService.addImage(blogId,description,dimensions);
         return new ResponseEntity<>("Added image successfully", HttpStatus.OK);

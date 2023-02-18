@@ -15,21 +15,22 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository;
 
-    public Image addImage(Integer blogId, String description, String dimensions) throws Exception {
+    public Image addImage(Integer blogId, String description, String dimensions) {
         //add an image to the blog
         Image image=new Image();
         image.setDescription(description);
         image.setDimensions(dimensions);
 
-        if(!blogRepository.findById(blogId).isPresent()){
-            throw new Exception();
-        }
-        Blog currblog=blogRepository.findById(blogId).get();
-        List<Image> imageList=currblog.getImageList();
-        imageList.add(image);
-        currblog.setImageList(imageList);
+        if(blogRepository.findById(blogId).isPresent()) {
 
-        blogRepository.save(currblog);
+
+            Blog currblog = blogRepository.findById(blogId).get();
+            List<Image> imageList = currblog.getImageList();
+            imageList.add(image);
+            currblog.setImageList(imageList);
+
+            blogRepository.save(currblog);
+        }
         return image;
     }
 

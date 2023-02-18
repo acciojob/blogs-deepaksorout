@@ -21,22 +21,23 @@ public class BlogService {
     @Autowired
     UserRepository userRepository;
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content)throws Exception {
+    public Blog createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
         Blog blog=new Blog();
         blog.setContent(content);
         blog.setTitle(title);
 
-        if(!userRepository.findById(userId).isPresent()){
-            throw new Exception();
+        if(userRepository.findById(userId).isPresent()) {
+
+
+            User curruser = userRepository.findById(userId).get();
+
+            List<Blog> blogList = curruser.getBlogList();
+            blogList.add(blog);
+            curruser.setBlogList(blogList);
+
+            userRepository.save(curruser);
         }
-        User curruser=userRepository.findById(userId).get();
-
-        List<Blog> blogList=curruser.getBlogList();
-        blogList.add(blog);
-        curruser.setBlogList(blogList);
-
-        userRepository.save(curruser);
 
         return blog;
     }
