@@ -58,9 +58,6 @@ public class Blog {
         return Pubdate;
     }
 
-    public void setPubdate(Date pubdate) {
-        Pubdate = pubdate;
-    }
 
     public User getUser() {
         return user;
