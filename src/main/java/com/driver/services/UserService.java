@@ -12,33 +12,27 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    UserRepository userRepository3;
 
     public User createUser(String username, String password){
-        User newuser=new User();
-
-        //setting all attributes of user
-        newuser.setUsername(username);
-        newuser.setPassword(password);
-
-        //saving user to userRepository
-        userRepository.save(newuser);
-
-        return newuser;
+        User user = new User(username, password);
+        userRepository3.save(user);
+        return user;
     }
-
 
     public void deleteUser(int userId){
-        userRepository.deleteById(userId);
+        userRepository3.deleteById(userId);
     }
 
-    public User updateUser(Integer id, String password){
-        User curruser=userRepository.findById(id).get();
-        curruser.setPassword(password);
-
-        userRepository.save(curruser);
-
-        return curruser;
+    public User updateUser(Integer id, String password)  {
+        User user;
+//        if(!userRepository3.findById(id).isPresent()) {
+//           throw new Exception();
+//        }
+        user = userRepository3.findById(id).get();
+        user.setPassword(password);
+        userRepository3.save(user);
+        return user;
     }
 }
 

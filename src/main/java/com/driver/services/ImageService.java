@@ -11,31 +11,25 @@ import java.util.List;
 public class ImageService {
 
     @Autowired
-    BlogRepository blogRepository;
+    BlogRepository blogRepository2;
     @Autowired
-    ImageRepository imageRepository;
+    ImageRepository imageRepository2;
 
     public Image addImage(Integer blogId, String description, String dimensions) {
         //add an image to the blog
-        Image image=new Image();
-        image.setDescription(description);
-        image.setDimensions(dimensions);
-
-
-
-            Blog currblog = blogRepository.findById(blogId).get();
-            List<Image> imageList = currblog.getImageList();
-            imageList.add(image);
-            currblog.setImageList(imageList);
-
-            blogRepository.save(currblog);
-
+//        if(!blogRepository2.findById(blogId).isPresent()) {
+//            throw new Exception();
+//        }
+        Blog blog = blogRepository2.findById(blogId).get();
+        Image image = new Image(blog,description,dimensions);
+        blog.getImageList().add(image);
+        blogRepository2.save(blog);
         return image;
+        //Here I am not explicitly adding image in image-repository because due to cascading effect
     }
 
     public void deleteImage(Integer id){
-        imageRepository.deleteById(id);
-        return;
+        imageRepository2.deleteById(id);
     }
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
@@ -44,7 +38,7 @@ public class ImageService {
 //        if(!imageRepository2.findById(id).isPresent()){
 //            throw new Exception();
 //        }
-        Image image = imageRepository.findById(id).get();
+        Image image = imageRepository2.findById(id).get();
 
         String imageDimensions = image.getDimensions();
         String [] imgarray = imageDimensions.split("X");
@@ -56,7 +50,9 @@ public class ImageService {
         int imgb = Integer.parseInt(imgarray[1]); //B -- > integer
 
         return no_Images(scrl,scrb,imgl,imgb);
+
     }
+
     private int no_Images(int scrl, int scrb, int imgl, int imgb) {
         int lenC = scrl/imgl; //
         int lenB = scrb/imgb;
