@@ -44,7 +44,7 @@ public class ImageService {
 //        if(!imageRepository2.findById(id).isPresent()){
 //            throw new Exception();
 //        }
-        Image image = imageRepository2.findById(id).get();
+        Image image = imageRepository.findById(id).get();
 
         String imageDimensions = image.getDimensions();
         String [] imgarray = imageDimensions.split("X");
