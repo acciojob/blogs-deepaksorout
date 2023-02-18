@@ -38,9 +38,6 @@ public class Blog {
         Id = id;
     }
 
-//    public void setPubdate(Date pubdate) {
-//        Pubdate = pubdate;
-//    }
 
     public String getContent() {
         return Content;
@@ -58,9 +55,6 @@ public class Blog {
         Title = title;
     }
 
-    public Date getPubdate() {
-        return Pubdate;
-    }
 
 
     public User getUser() {
