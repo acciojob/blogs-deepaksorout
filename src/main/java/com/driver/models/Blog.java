@@ -13,7 +13,7 @@ import java.util.List;
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int Id;
 
     private String Content;
     private String Title;
@@ -30,13 +30,17 @@ public class Blog {
     public Blog() {
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return Id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        Id = id;
     }
+
+//    public void setPubdate(Date pubdate) {
+//        Pubdate = pubdate;
+//    }
 
     public String getContent() {
         return Content;
