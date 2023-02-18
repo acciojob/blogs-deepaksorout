@@ -40,31 +40,26 @@ public class ImageService {
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
-        Image currimage=imageRepository.findById(id).get();
-        String currdimensions= currimage.getDimensions();
+        String [] scrarray = screenDimensions.split("X"); //A=Length   X    B=Breadth
+//        if(!imageRepository2.findById(id).isPresent()){
+//            throw new Exception();
+//        }
+        Image image = imageRepository2.findById(id).get();
 
-        int indexofx=-1;
-        for(int i=0;i<currdimensions.length();i++){
-            if(currdimensions.charAt(i)=='X'){
-                indexofx=i;
-                break;
-            }
-        }
-        int firstpart=Integer.valueOf(currdimensions.substring(0,indexofx));
-        int secondpart=Integer.valueOf(currdimensions.substring(indexofx+1));
+        String imageDimensions = image.getDimensions();
+        String [] imgarray = imageDimensions.split("X");
 
-        int temp=firstpart*secondpart;
+        int scrl = Integer.parseInt(scrarray[0]); //A -- > integer
+        int scrb = Integer.parseInt(scrarray[1]); //B -- > integer
 
-        int indexofx1=-1;
-        for(int i=0;i<screenDimensions.length();i++){
-            if(currdimensions.charAt(i)=='X'){
-                indexofx1=i;
-                break;
-            }
-        }
-        int temp2=Integer.valueOf(screenDimensions.substring(0,indexofx1)) * Integer.valueOf(screenDimensions.substring(indexofx1+1));
+        int imgl = Integer.parseInt(imgarray[0]); //A -- > integer
+        int imgb = Integer.parseInt(imgarray[1]); //B -- > integer
 
-        return ( temp2/temp);
-
+        return no_Images(scrl,scrb,imgl,imgb);
+    }
+    private int no_Images(int scrl, int scrb, int imgl, int imgb) {
+        int lenC = scrl/imgl; //
+        int lenB = scrb/imgb;
+        return lenC*lenB;
     }
 }
