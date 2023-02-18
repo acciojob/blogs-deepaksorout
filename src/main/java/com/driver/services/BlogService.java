@@ -21,7 +21,7 @@ public class BlogService {
     @Autowired
     UserRepository userRepository;
 
-    public void createAndReturnBlog(Integer userId, String title, String content)throws Exception {
+    public Blog createAndReturnBlog(Integer userId, String title, String content)throws Exception {
         //create a blog at the current time
         Blog blog=new Blog();
         blog.setContent(content);
@@ -38,7 +38,7 @@ public class BlogService {
 
         userRepository.save(curruser);
 
-        return;
+        return blog;
     }
 
     public void deleteBlog(int blogId){

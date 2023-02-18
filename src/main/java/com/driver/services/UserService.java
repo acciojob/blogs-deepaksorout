@@ -14,7 +14,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void createUser(String username, String password){
+    public User createUser(String username, String password){
         User newuser=new User();
 
         //setting all attributes of user
@@ -26,7 +26,7 @@ public class UserService {
         //saving user to userRepository
         userRepository.save(newuser);
 
-        return;
+        return newuser;
     }
 
 
@@ -34,11 +34,13 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    public void updateUser(int id, String password){
+    public User updateUser(int id, String password){
         User curruser=userRepository.findById(id).get();
         curruser.setPassword(password);
 
         userRepository.save(curruser);
+
+        return curruser;
     }
 }
 

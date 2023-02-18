@@ -15,7 +15,7 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository;
 
-    public void addImage(Integer blogId, String description, String dimensions) throws Exception {
+    public Image addImage(Integer blogId, String description, String dimensions) throws Exception {
         //add an image to the blog
         Image image=new Image();
         image.setDescription(description);
@@ -30,6 +30,7 @@ public class ImageService {
         currblog.setImageList(imageList);
 
         blogRepository.save(currblog);
+        return image;
     }
 
     public void deleteImage(Integer id){
