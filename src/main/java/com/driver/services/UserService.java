@@ -20,8 +20,6 @@ public class UserService {
         //setting all attributes of user
         newuser.setUsername(username);
         newuser.setPassword(password);
-        newuser.setFirstname("test");
-        newuser.setLastname("test");
 
         //saving user to userRepository
         userRepository.save(newuser);
