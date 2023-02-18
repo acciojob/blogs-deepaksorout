@@ -21,7 +21,6 @@ public class ImageService {
         image.setDescription(description);
         image.setDimensions(dimensions);
 
-        if(blogRepository.findById(blogId).isPresent()) {
 
 
             Blog currblog = blogRepository.findById(blogId).get();
@@ -30,7 +29,7 @@ public class ImageService {
             currblog.setImageList(imageList);
 
             blogRepository.save(currblog);
-        }
+
         return image;
     }
 

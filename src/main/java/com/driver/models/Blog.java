@@ -12,58 +12,73 @@ import java.util.List;
 @Table(name = "blog")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    private int id;
+    private String title;
+    private String content;
 
-    private String Content;
-    private String Title;
     @CreationTimestamp
-    private Date PubDate;
+    private Date pubDate;
 
+    //Mapping
     @ManyToOne
     @JoinColumn
     private User user;
 
-    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    private List<Image> imageList=new ArrayList<>();
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Image> imageList;
 
     public Blog() {
+
     }
 
-    public Date getPubDate() {
-        return PubDate;
+    public Blog(User user, String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
     }
 
-    public void setPubDate(Date pubDate) {
-        PubDate = pubDate;
+    public Blog(int id, String title, String content, Date pubDate, User user, List<Image> imageList) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.pubDate = pubDate;
+        this.user = user;
+        this.imageList = imageList;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
-    }
-
-
-    public String getContent() {
-        return Content;
-    }
-
-    public void setContent(String content) {
-        Content = content;
+        this.id = id;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
+    public String getContent() {
+        return content;
+    }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(Date pubDate) {
+        this.pubDate = pubDate;
+    }
 
     public User getUser() {
         return user;

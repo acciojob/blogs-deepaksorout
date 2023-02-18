@@ -27,17 +27,12 @@ public class BlogService {
         blog.setContent(content);
         blog.setTitle(title);
 
-        if(userRepository.findById(userId).isPresent()) {
-
-
             User curruser = userRepository.findById(userId).get();
-
             List<Blog> blogList = curruser.getBlogList();
             blogList.add(blog);
             curruser.setBlogList(blogList);
 
             userRepository.save(curruser);
-        }
 
         return blog;
     }
